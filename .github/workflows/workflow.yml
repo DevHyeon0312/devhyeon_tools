@@ -24,9 +24,9 @@ jobs:
           cd example_macos/build/web
           git init
            # 3. change your email
-          git config --global user.email rlawjdxo1212@naver.com
+          git config --global user.email devhyeon0312@gmail.com
           # 4. change your name
-          git config --global user.name origogi
+          git config --global user.name DevHyeon0312
           git status
           # 5. change your repository
           git remote add origin https://$@github.com/Origogi/Vertical_Card_Pager.git 
