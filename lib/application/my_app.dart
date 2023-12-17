@@ -9,36 +9,31 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return NavigationDrawerApp();
-    // MaterialApp(
-    //   title: 'DevHyeon Tools',
-    //   theme: ThemeData.light(
-    //       useMaterial3: true
-    //   ),
-    //   darkTheme: ThemeData.dark(
-    //       useMaterial3: true
-    //   ),
-    //   themeMode: ThemeMode.dark,
-    //   home: const MyHomePage(),
-    // );
+    return const NavigationDrawerApp();
   }
 }
 
 class ExampleDestination {
-  const ExampleDestination(this.label, this.icon, this.selectedIcon);
+  const ExampleDestination(this.label, this.icon, this.selectedIcon, this.subItems);
 
   final String label;
   final Widget icon;
   final Widget selectedIcon;
+  final List<String> subItems; // 하위 아이템 리스트 추가
 }
 
 const List<ExampleDestination> destinations = <ExampleDestination>[
   ExampleDestination(
-      'Messages', Icon(Icons.widgets_outlined), Icon(Icons.widgets)),
+      'Component', Icon(Icons.widgets_outlined), Icon(Icons.widgets),
+  ['TextView', 'Chip',],),
   ExampleDestination(
-      'Profile', Icon(Icons.format_paint_outlined), Icon(Icons.format_paint)),
+    'Style', Icon(Icons.widgets_outlined), Icon(Icons.widgets),
+    ['Font', 'Color',],),
   ExampleDestination(
-      'Settings', Icon(Icons.settings_outlined), Icon(Icons.settings)),
+      'Company', Icon(Icons.format_paint_outlined), Icon(Icons.format_paint),
+    ['Tictoccroc',],),
+  ExampleDestination(
+      'Profile', Icon(Icons.settings_outlined), Icon(Icons.settings), [],),
 ];
 
 class NavigationDrawerApp extends StatelessWidget {
@@ -65,6 +60,8 @@ class NavigationDrawerExample extends StatefulWidget {
 class _NavigationDrawerExampleState extends State<NavigationDrawerExample> {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
+  late LayoutType layoutType;
+
   int screenIndex = 0;
   late bool showNavigationDrawer;
 
@@ -75,11 +72,31 @@ class _NavigationDrawerExampleState extends State<NavigationDrawerExample> {
   }
 
   void openDrawer() {
-    scaffoldKey.currentState!.openEndDrawer();
+    scaffoldKey.currentState!.openDrawer();
   }
 
-  Widget buildBottomBarScaffold() {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    layoutType = DeviceInfo.init(context: context).layoutType;
+    showNavigationDrawer = layoutType == LayoutType.expanded;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return showNavigationDrawer
+        ? buildDrawerScaffold(context)
+        : buildBottomBarScaffold(context);
+  }
+
+  Widget buildBottomBarScaffold(BuildContext context) {
     return Scaffold(
+      appBar: DynamicAppBar(layoutType: layoutType,).build(),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -111,35 +128,57 @@ class _NavigationDrawerExampleState extends State<NavigationDrawerExample> {
 
   Widget buildDrawerScaffold(BuildContext context) {
     return Scaffold(
+      appBar: DynamicAppBar(layoutType: layoutType,).build(),
       key: scaffoldKey,
+      drawer: Drawer(
+        child: ListView(
+          children: destinations.map(
+                (ExampleDestination destination) {
+                  if (destination.subItems.isNotEmpty) {
+                    return ExpansionTile(
+                      title: Text(
+                        destination.label,
+                        style: TextStyle(
+                          fontSize: 18,
+                        ),
+                      ),
+                      childrenPadding: EdgeInsets.zero,
+                      children: destination.subItems.map((subItem) {
+                        return ListTile(
+                          title: Text(
+                              subItem,
+                            style: TextStyle(
+                              fontSize: 14,
+                            ),
+                          ),
+                          onTap: () {
+                            print('Selected SubItem: $subItem');
+                          },
+                        );
+                      }).toList(),
+                    );
+                  } else {
+                    return ListTile(
+                      title: Text(
+                        destination.label,
+                        style: TextStyle(
+                          fontSize: 18,
+                        ),
+                      ),
+                      onTap: () {
+                        print('Selected Item: $destination');
+                      },
+                    );
+                  }
+            },
+          ).toList(),
+        ),
+      ),
       body: SafeArea(
         bottom: false,
         top: false,
         child: Row(
           children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 5),
-              child: NavigationRail(
-                minWidth: 50,
-                destinations: destinations.map(
-                      (ExampleDestination destination) {
-                    return NavigationRailDestination(
-                      label: Text(destination.label),
-                      icon: destination.icon,
-                      selectedIcon: destination.selectedIcon,
-                    );
-                  },
-                ).toList(),
-                selectedIndex: screenIndex,
-                useIndicator: true,
-                onDestinationSelected: (int index) {
-                  setState(() {
-                    screenIndex = index;
-                  });
-                },
-              ),
-            ),
-            const VerticalDivider(thickness: 1, width: 1),
             Expanded(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -155,214 +194,6 @@ class _NavigationDrawerExampleState extends State<NavigationDrawerExample> {
           ],
         ),
       ),
-      endDrawer: NavigationDrawer(
-        onDestinationSelected: handleScreenChanged,
-        selectedIndex: screenIndex,
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.fromLTRB(28, 16, 16, 10),
-            child: Text(
-              'Header',
-              style: Theme.of(context).textTheme.titleSmall,
-            ),
-          ),
-          ...destinations.map(
-                (ExampleDestination destination) {
-              return NavigationDrawerDestination(
-                label: Text(destination.label),
-                icon: destination.icon,
-                selectedIcon: destination.selectedIcon,
-              );
-            },
-          ),
-          const Padding(
-            padding: EdgeInsets.fromLTRB(28, 16, 28, 10),
-            child: Divider(),
-          ),
-        ],
-      ),
     );
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    showNavigationDrawer = MediaQuery.of(context).size.width >= 600;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return showNavigationDrawer
-        ? buildDrawerScaffold(context)
-        : buildBottomBarScaffold();
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
-  int _selectedTab = 0;
-
-  late AnimationController _animationController;
-  late Animation<Offset> _animation;
-
-  @override
-  void initState() {
-    super.initState();
-    _animationController = AnimationController(
-      duration: Duration(milliseconds: 300),
-      vsync: this,
-    );
-    _animation = Tween<Offset>(
-      begin: Offset(-1.0, 0.0),
-      end: Offset(0.5, 0.0),
-    ).animate(
-      CurvedAnimation(
-        curve: Curves.bounceIn,
-        parent: _animationController,
-      ),
-    );
-  }
-
-  bool isSubMenuVisible = false;
-
-  @override
-  Widget build(BuildContext context) {
-    var currentTheme = Theme.of(context);
-    var layoutType = DeviceInfo.init(context: context).layoutType;
-    switch(layoutType) {
-      case LayoutType.expanded: {
-        return Scaffold(
-          body: Stack(
-            children: [
-              Container(
-                  margin: EdgeInsets.only(left: 100),
-                  color: Colors.orange,
-                  child: MouseRegion(
-                    onEnter: (onEnter) {
-                      setState(() {
-                        isSubMenuVisible = false;
-                        if (isSubMenuVisible) {
-                          _animationController.forward();
-                        } else {
-                          _animationController.reverse();
-                        }
-                      });
-                    },
-                    child: Center(
-                      child: Text('Main Content'),
-                    ),
-                  )
-              ),
-              isSubMenuVisible ? SlideTransition(
-                position: _animation,
-                child: Container(
-                  width: 200,
-                  color: ThemeColor.getDrawerBackground(themeMode: ThemeMode.dark),
-                  child: Center(
-                    child: Text(
-                      'Slide Transition Widget',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                ),
-              ) : Container(),
-              Container(
-                color: Colors.blue,
-                width: 100,
-                child: ListView(
-                  padding: EdgeInsets.zero,
-                  children: <Widget>[
-                    MouseRegion(
-                        cursor: SystemMouseCursors.click,
-                        onEnter: (onEnter) {
-                          setState(() {
-                            isSubMenuVisible = true;
-                            if (isSubMenuVisible) {
-                              _animationController.forward();
-                            } else {
-                              _animationController.reverse();
-                            }
-                          });
-                        },
-                        child: ListTile(
-                          title: Text('Menu Item 1'),
-                          onTap: () {
-                          },
-                        )
-                    ),
-                    MouseRegion(
-                        cursor: SystemMouseCursors.click,
-                        onEnter: (onEnter) {
-                          setState(() {
-                            isSubMenuVisible = false;
-                            if (isSubMenuVisible) {
-                              _animationController.forward();
-                            } else {
-                              _animationController.reverse();
-                            }
-                          });
-                        },
-                        child: ListTile(
-                          title: Text('Menu Item 1'),
-                          onTap: () {
-                          },
-                        )
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        );
-      }
-      default: {
-        return Scaffold(
-          appBar: DynamicAppBar(layoutType: layoutType,).build(),
-          body: Center(
-            child: Text('Main Content'),
-          ),
-          drawer: Drawer(
-            // 왼쪽에 나타날 네비게이션 바
-            child: ListView(
-              padding: EdgeInsets.zero,
-              children: <Widget>[
-                DrawerHeader(
-                  decoration: BoxDecoration(
-                    color: Colors.blue,
-                  ),
-                  child: Text(
-                    'Drawer Header',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 24,
-                    ),
-                  ),
-                ),
-                ListTile(
-                  title: Text('Menu Item 1'),
-                  onTap: () {
-                    // 네비게이션 메뉴를 눌렀을 때의 동작 정의
-                    Navigator.pop(context); // Drawer를 닫습니다.
-                  },
-                ),
-                ListTile(
-                  title: Text('Menu Item 2'),
-                  onTap: () {
-                    // 네비게이션 메뉴를 눌렀을 때의 동작 정의
-                    Navigator.pop(context); // Drawer를 닫습니다.
-                  },
-                ),
-              ],
-            ),
-          ),
-        );
-      }
-    }
   }
 }
