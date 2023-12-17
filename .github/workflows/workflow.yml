@@ -18,6 +18,7 @@ jobs:
       - run: flutter config --enable-web
       - run: flutter pub get
       - run: flutter build web --release
+        working-directory: ./Users/devhyeon_github/devhyeon_tools
       - run: |
           # 2. change path to [existed lib/main.dart path]/build/web
           cd ./Users/devhyeon_github/devhyeon_tools/build/web
