@@ -21,7 +21,7 @@ jobs:
         working-directory: ./example_macos
       - run: |
           # 2. change path to [existed lib/main.dart path]/build/web
-          cd example_macos/build/web
+          cd devhyeon_github/devhyeon_tools/build/web
           git init
            # 3. change your email
           git config --global user.email devhyeon0312@gmail.com
@@ -29,7 +29,7 @@ jobs:
           git config --global user.name DevHyeon0312
           git status
           # 5. change your repository
-          git remote add origin https://$@github.com/Origogi/Vertical_Card_Pager.git 
+          git remote add origin https://$@github.com/DevHyeon0312/devhyeon_tools.git 
           git checkout -b gh-pages
           git add --all
           git commit -m "update"
