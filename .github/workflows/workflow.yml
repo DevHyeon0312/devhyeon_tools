@@ -6,8 +6,6 @@ on:
 jobs:
   build:
     name: Build Web
-    env:
-      my_secret: $
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v3
@@ -30,3 +28,5 @@ jobs:
           git add --all
           git commit -m "update"
           git push origin web-pages -f
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
