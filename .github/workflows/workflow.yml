@@ -22,17 +22,13 @@ jobs:
         # 1. change path which exist lib/main.dart
         working-directory: ./Users/devhyeon_github/devhyeon_tools
       - run: |
-          # 2. change path to [existed lib/main.dart path]/build/web
           cd ./Users/devhyeon_github/devhyeon_tools/build/web
           git init
-           # 3. change your email
           git config --global user.email devhyeon0312@gmail.com
-          # 4. change your name
           git config --global user.name DevHyeon0312
           git status
-          # 5. change your repository
           git remote add origin https://$@github.com/DevHyeon0312/devhyeon_tools.git 
-          git checkout -b devhyeon-pages
+          git checkout -b web-pages
           git add --all
           git commit -m "update"
-          git push origin devhyeon-pages -f
+          git push origin web-pages -f
