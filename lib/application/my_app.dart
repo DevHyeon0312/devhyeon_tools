@@ -1,5 +1,6 @@
+import 'package:devhyeon_tools/ui/app_bar/dynamic_app_bar.dart';
+import 'package:devhyeon_tools/utils/device_info.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -41,53 +42,48 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return AdaptiveScaffold(
-      smallBreakpoint: const WidthPlatformBreakpoint(end: 700),
-      mediumBreakpoint: const WidthPlatformBreakpoint(begin: 700, end: 1000),
-      largeBreakpoint: const WidthPlatformBreakpoint(begin: 1000),
-      useDrawer: false,
-      selectedIndex: _selectedTab,
-      onSelectedIndexChange: (int index) {
-        setState(() {
-          _selectedTab = index;
-        });
-      },
-      destinations: const <NavigationDestination>[
-        NavigationDestination(
-          icon: Icon(Icons.inbox_outlined),
-          selectedIcon: Icon(Icons.inbox),
-          label: 'Inbox',
+    var layoutType = DeviceInfo.init(context: context).layoutType;
+    return MaterialApp(
+        home: Scaffold(
+          appBar: DynamicAppBar(layoutType: layoutType,).build(),
+          body: Center(
+            child: Text('Main Content'),
+          ),
+          drawer: Drawer(
+            // 왼쪽에 나타날 네비게이션 바
+            child: ListView(
+              padding: EdgeInsets.zero,
+              children: <Widget>[
+                DrawerHeader(
+                  decoration: BoxDecoration(
+                    color: Colors.blue,
+                  ),
+                  child: Text(
+                    'Drawer Header',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 24,
+                    ),
+                  ),
+                ),
+                ListTile(
+                  title: Text('Menu Item 1'),
+                  onTap: () {
+                    // 네비게이션 메뉴를 눌렀을 때의 동작 정의
+                    Navigator.pop(context); // Drawer를 닫습니다.
+                  },
+                ),
+                ListTile(
+                  title: Text('Menu Item 2'),
+                  onTap: () {
+                    // 네비게이션 메뉴를 눌렀을 때의 동작 정의
+                    Navigator.pop(context); // Drawer를 닫습니다.
+                  },
+                ),
+              ],
+            ),
+          ),
         ),
-        NavigationDestination(
-          icon: Icon(Icons.article_outlined),
-          selectedIcon: Icon(Icons.article),
-          label: 'Articles',
-        ),
-        NavigationDestination(
-          icon: Icon(Icons.chat_outlined),
-          selectedIcon: Icon(Icons.chat),
-          label: 'Chat',
-        ),
-        NavigationDestination(
-          icon: Icon(Icons.video_call_outlined),
-          selectedIcon: Icon(Icons.video_call),
-          label: 'Video',
-        ),
-        NavigationDestination(
-          icon: Icon(Icons.home_outlined),
-          selectedIcon: Icon(Icons.home),
-          label: 'Inbox',
-        ),
-      ],
-      body: (_) => GridView.count(crossAxisCount: 2, children: children),
-      smallBody: (_) => ListView.builder(
-        itemCount: children.length,
-        itemBuilder: (_, int idx) => children[idx],
-      ),
-      secondaryBody: (_) => Container(
-        color: const Color.fromARGB(255, 234, 158, 192),
-      ),
-      smallSecondaryBody: AdaptiveScaffold.emptyBuilder,
     );
   }
 }
