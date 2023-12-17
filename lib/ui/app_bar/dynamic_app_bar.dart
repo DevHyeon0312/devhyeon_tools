@@ -2,7 +2,7 @@
 import 'package:devhyeon_tools/utils/device_info.dart';
 import 'package:flutter/material.dart';
 
-class DynamicAppBar {
+class DynamicAppBar extends AppBar {
   final LayoutType layoutType;
   DynamicAppBar({required this.layoutType});
 
@@ -19,7 +19,9 @@ class DynamicAppBar {
         );
       }
       default: {
-        return null;
+        return AppBar(
+          title: const Text('ExpandedAppBar'),
+        );
       }
     }
   }
