@@ -20,7 +20,7 @@ jobs:
           cd build/web
           git init
           git config --global user.email devhyeon0312@gmail.com
-          git config --global user.name DevHyeon0312
+          git config --global user.name 양영현
           git status
           git remote add origin https://$@github.com/DevHyeon0312/devhyeon_tools.git 
           git checkout -b web-pages
