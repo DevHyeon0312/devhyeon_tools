@@ -32,7 +32,7 @@ jobs:
           git status
           # 5. change your repository
           git remote add origin https://$@github.com/DevHyeon0312/devhyeon_tools.git 
-          git checkout -b gh-pages
+          git checkout -b devhyeon-pages
           git add --all
           git commit -m "update"
-          git push origin gh-pages -f
+          git push origin devhyeon-pages -f
