@@ -4,23 +4,21 @@ import 'package:flutter/material.dart';
 
 class DynamicAppBar extends AppBar {
   final LayoutType layoutType;
-  DynamicAppBar({required this.layoutType});
+  DynamicAppBar({super.key, required this.layoutType});
 
   AppBar? build() {
     switch(layoutType) {
       case LayoutType.compact : {
-        return AppBar(
-          title: const Text('CompactAppBar'),
-        );
+        return null;
       }
       case LayoutType.medium: {
         return AppBar(
-          title: const Text('MediumAppBar'),
+          title: null,
         );
       }
       default: {
         return AppBar(
-          title: const Text('ExpandedAppBar'),
+          title: const Text('Flutter Helper'),
         );
       }
     }
