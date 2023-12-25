@@ -20,7 +20,7 @@ class _ComponentPageState extends State<ComponentPage> {
       padding: const EdgeInsets.all(16),
       child: GridView.builder(
         gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-          maxCrossAxisExtent: 400.0, // 각 아이템의 최대 너비
+          maxCrossAxisExtent: 300.0, // 각 아이템의 최대 너비
           crossAxisSpacing: 8.0, // 열 간의 간격
           mainAxisSpacing: 8.0, // 행 간의 간격
         ),
@@ -38,33 +38,22 @@ class _ComponentPageState extends State<ComponentPage> {
       name: 'Label Chip',
       description: 'Use for simple badges or hashtags.',
       onClickDetailButton: () {
-        windowOpenNamed(context, RouteName.profile);
+        Navigator.pushNamed(context, RouteName.detailLabelChip);
       },
-      onClickCodeButton: () {  },
+      onClickCodeButton: () {
+        final snackBar = SnackBar(
+          content: const Text('Coming Soon..'),
+          duration: const Duration(seconds: 2),
+          action: SnackBarAction(
+            label: 'Close',
+            onPressed: () {
+              // Undo 기능 추가
+              // 여기에 Undo를 눌렀을 때 수행할 동작을 추가할 수 있습니다.
+            },
+          ),
+        );
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      },
     ),
-
-    ComponentListItemWidget(
-      component: labelChipSampleList,
-      name: 'Label Chip',
-      description: 'Use for simple badges or hashtags.',
-      onClickDetailButton: () {  },
-      onClickCodeButton: () {  },
-    ),
-
-    ComponentListItemWidget(
-      component: labelChipSampleList,
-      name: 'Label Chip',
-      description: 'Use for simple badges or hashtags.',
-      onClickDetailButton: () {  },
-      onClickCodeButton: () {  },
-    ),
-
-    ComponentListItemWidget(
-      component: labelChipSampleList,
-      name: 'Label Chip',
-      description: 'Use for simple badges or hashtags.',
-      onClickDetailButton: () {  },
-      onClickCodeButton: () {  },
-    )
   ];
 }

@@ -1,4 +1,6 @@
+import 'package:devhyeon_tools/application/router.dart';
 import 'package:devhyeon_tools/ui/page/component/component_page.dart';
+import 'package:devhyeon_tools/ui/page/component/detail/label_chip_detail_page.dart';
 import 'package:devhyeon_tools/ui/page/profile/profile_page.dart';
 import 'package:devhyeon_tools/ui/page/sample/sample_page.dart';
 import 'package:devhyeon_tools/ui/page/storage/storage_page.dart';
@@ -73,14 +75,14 @@ const List<MainDestination> destinations = <MainDestination>[
       SubDestination(
         index: 0,
         routeName: '',
-        page: Placeholder(),
-        label: 'TextView',
+        page: ComponentPage(),
+        label: 'All',
       ),
       SubDestination(
         index: 1,
-        routeName: '',
-        page: Placeholder(),
-        label: 'Chip',
+        routeName: RouteName.detailLabelChip,
+        page: LabelChipDetailPage(),
+        label: 'Label Chip',
       ),
     ],
   ),

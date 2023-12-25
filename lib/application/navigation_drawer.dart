@@ -110,7 +110,11 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                         ),
                       ),
                       onTap: () {
-                        handleScreenChanged(subDestination);
+                        if (subDestination.routeName.isNotEmpty) {
+                          Navigator.pushNamed(context, subDestination.routeName);
+                        } else {
+                          handleScreenChanged(subDestination);
+                        }
                       },
                     );
                   }).toList(),

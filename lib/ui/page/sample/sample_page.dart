@@ -10,6 +10,10 @@ class SamplePage extends StatefulWidget {
 class _SamplePageState extends State<SamplePage> {
   @override
   Widget build(BuildContext context) {
-    return const Text('sample Page');
+    return const Center(
+      child: Text(
+          'Coming Soon..'
+      ),
+    );
   }
 }

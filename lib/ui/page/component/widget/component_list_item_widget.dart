@@ -41,10 +41,11 @@ class _ComponentListItemWidgetState extends State<ComponentListItemWidget> {
               const SizedBox(height: 8,),
               widget.component,
               const SizedBox(height: 8,),
-              Padding(
+              Container(
                 padding: const EdgeInsets.only(left: 16, right: 16),
                 child: Text(
                   widget.description,
+                  maxLines: 3,
                 ),
               ),
               const Spacer(),
@@ -55,7 +56,9 @@ class _ComponentListItemWidgetState extends State<ComponentListItemWidget> {
                   TextButton(onPressed: () {
                     widget.onClickDetailButton.call();
                   }, child: const Text('Detail')),
-                  TextButton(onPressed: () {}, child: const Text('Code'))
+                  TextButton(onPressed: () {
+                    widget.onClickCodeButton.call();
+                  }, child: const Text('Code'))
                 ],
               )
             ],
