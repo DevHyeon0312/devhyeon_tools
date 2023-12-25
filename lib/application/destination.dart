@@ -2,6 +2,7 @@ import 'package:devhyeon_tools/application/router.dart';
 import 'package:devhyeon_tools/ui/page/component/component_page.dart';
 import 'package:devhyeon_tools/ui/page/profile/profile_page.dart';
 import 'package:devhyeon_tools/ui/page/sample/sample_page.dart';
+import 'package:devhyeon_tools/ui/page/setting/font/font_page.dart';
 import 'package:devhyeon_tools/ui/page/setting/setting_page.dart';
 import 'package:devhyeon_tools/ui/page/storage/storage_page.dart';
 import 'package:flutter/material.dart';
@@ -101,8 +102,8 @@ const List<MainDestination> destinations = <MainDestination>[
     subItems: [
       SubDestination(
         index: 0,
-        routeName: RouteName.profile,
-        page: ProfilePage(),
+        routeName: RouteName.settingFont,
+        page: FontPage(),
         label: 'Font',
       ),
     ],
