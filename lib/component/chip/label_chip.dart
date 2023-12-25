@@ -105,5 +105,19 @@ Widget labelChipSampleList = Wrap(
       borderRadius: BorderRadius.circular(2.0),
       padding: const EdgeInsets.only(left: 8, right: 8, top: 2, bottom: 2),
     ),
+    LabelChip(
+      text: '😊emoji-1',
+      textStyle: null,
+      backgroundColor: Colors.greenAccent,
+      borderRadius: BorderRadius.circular(2.0),
+      padding: const EdgeInsets.only(left: 8, right: 8, top: 2, bottom: 2),
+    ),
+    LabelChip(
+      text: '📌emoji-2',
+      textStyle: null,
+      backgroundColor: Colors.greenAccent,
+      borderRadius: BorderRadius.circular(2.0),
+      padding: const EdgeInsets.only(left: 8, right: 8, top: 2, bottom: 2),
+    ),
   ],
 );

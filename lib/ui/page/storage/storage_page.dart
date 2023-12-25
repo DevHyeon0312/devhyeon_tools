@@ -12,7 +12,7 @@ class _StoragePageState extends State<StoragePage> {
   Widget build(BuildContext context) {
     return const Center(
       child: Text(
-        '준비중입니다.'
+        'Coming Soon..'
       ),
     );
   }
