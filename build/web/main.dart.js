@@ -51433,7 +51433,7 @@ s=this.b
 return s*(B.f.hU(a-1,this.a)+1)-(s-this.d)}}
 A.a_r.prototype={}
 A.a_s.prototype={
-AH(a){var s=a.w,r=Math.max(1,B.c.cU(s/308)),q=Math.max(0,s-8*(r-1))/r,p=q/1
+AH(a){var s=a.w,r=Math.max(1,B.c.cU(s/408)),q=Math.max(0,s-8*(r-1))/r,p=q/0.9
 return new A.a_v(r,p+8,q+8,p,q,A.OJ(a.x))}}
 A.oT.prototype={
 i(a){return"crossAxisOffset="+A.h(this.w)+"; "+this.OQ(0)}}
