@@ -29,10 +29,10 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
   }
 
   void openDrawer() {
-    scaffoldKey.currentState!.openDrawer();
+    scaffoldKey.currentState?.openDrawer();
   }
   void closeDrawer() {
-    scaffoldKey.currentState!.closeDrawer();
+    scaffoldKey.currentState?.closeDrawer();
   }
 
   @override
