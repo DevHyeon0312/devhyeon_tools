@@ -23,7 +23,7 @@ class _ComponentPageState extends State<ComponentPage> {
           maxCrossAxisExtent: 400.0, // 각 아이템의 최대 너비
           crossAxisSpacing: 8.0, // 열 간의 간격
           mainAxisSpacing: 8.0, // 행 간의 간격
-          childAspectRatio: 0.9, // 높이와 너비의 비율을 1:1로 유지
+          childAspectRatio: 1.2, // 높이와 너비의 비율을 1:1로 유지
         ),
         itemCount: getComponentListItemWidgets(context).length, // 아이템 개수
         itemBuilder: (context, index) {
