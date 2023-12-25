@@ -1,14 +1,9 @@
-import 'package:devhyeon_tools/application/router.dart';
-import 'package:devhyeon_tools/component/chip/label_chip.dart';
-import 'package:devhyeon_tools/ui/page/sample/sample_page.dart';
-import 'package:devhyeon_tools/utils/app_util.dart';
 import 'package:flutter/material.dart';
 
 class ComponentListItemWidget extends StatefulWidget {
-  const ComponentListItemWidget({super.key, required this.component, required this.name, required this.description, required this.onClickDetailButton, required this.onClickCodeButton});
+  const ComponentListItemWidget({super.key, required this.component, required this.name, required this.onClickDetailButton, required this.onClickCodeButton});
   final Widget component;
   final String name;
-  final String description;
   final VoidCallback onClickDetailButton;
   final VoidCallback onClickCodeButton;
 
@@ -40,14 +35,6 @@ class _ComponentListItemWidgetState extends State<ComponentListItemWidget> {
               ),
               const SizedBox(height: 8,),
               widget.component,
-              const SizedBox(height: 8,),
-              Container(
-                padding: const EdgeInsets.only(left: 16, right: 16),
-                child: Text(
-                  widget.description,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
               const Spacer(),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.end,

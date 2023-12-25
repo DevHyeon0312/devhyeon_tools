@@ -1,8 +1,8 @@
 import 'package:devhyeon_tools/application/router.dart';
 import 'package:devhyeon_tools/ui/page/component/component_page.dart';
-import 'package:devhyeon_tools/ui/page/component/detail/label_chip_detail_page.dart';
 import 'package:devhyeon_tools/ui/page/profile/profile_page.dart';
 import 'package:devhyeon_tools/ui/page/sample/sample_page.dart';
+import 'package:devhyeon_tools/ui/page/setting/setting_page.dart';
 import 'package:devhyeon_tools/ui/page/storage/storage_page.dart';
 import 'package:flutter/material.dart';
 
@@ -58,6 +58,15 @@ const List<MainDestination> destinations = <MainDestination>[
   MainDestination(
     index: 0,
     routeName: '',
+    page: ProfilePage(),
+    label: 'Profile',
+    defaultIcon: Icon(Icons.account_circle_outlined),
+    selectedIcon:Icon(Icons.account_circle),
+    subItems: [],
+  ),
+  MainDestination(
+    index: 1,
+    routeName: '',
     page: StoragePage(),
     label: 'Storage',
     defaultIcon: Icon(Icons.sd_storage_outlined),
@@ -65,29 +74,16 @@ const List<MainDestination> destinations = <MainDestination>[
     subItems: [],
   ),
   MainDestination(
-    index: 1,
+    index: 2,
     routeName: '',
     label: 'Component',
     page: ComponentPage(),
     defaultIcon: Icon(Icons.widgets_outlined),
     selectedIcon:Icon(Icons.widgets),
-    subItems: [
-      SubDestination(
-        index: 0,
-        routeName: '',
-        page: ComponentPage(),
-        label: 'All',
-      ),
-      SubDestination(
-        index: 1,
-        routeName: RouteName.detailLabelChip,
-        page: LabelChipDetailPage(),
-        label: 'Label Chip',
-      ),
-    ],
+    subItems: [],
   ),
   MainDestination(
-    index: 2,
+    index: 3,
     routeName: '',
     label: 'Sample',
     page: SamplePage(),
@@ -96,12 +92,19 @@ const List<MainDestination> destinations = <MainDestination>[
     subItems: [],
   ),
   MainDestination(
-    index: 3,
+    index: 4,
     routeName: '',
-    page: ProfilePage(),
-    label: 'Profile',
-    defaultIcon: Icon(Icons.account_circle_outlined),
-    selectedIcon:Icon(Icons.account_circle),
-    subItems: [],
+    page: SettingPage(),
+    label: 'Setting',
+    defaultIcon: Icon(Icons.settings_suggest_outlined),
+    selectedIcon:Icon(Icons.settings_suggest),
+    subItems: [
+      SubDestination(
+        index: 0,
+        routeName: RouteName.profile,
+        page: ProfilePage(),
+        label: 'Font',
+      ),
+    ],
   ),
 ];

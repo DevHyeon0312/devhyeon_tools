@@ -1,5 +1,5 @@
 name: devhyeon_tools
-description: "DevHyeon Tools Fluter Project"
+description: "DevHyeon Tools Flutter Project"
 publish_to: 'none'
 
 version: 1.0.1+4
@@ -22,3 +22,6 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - assets/images/

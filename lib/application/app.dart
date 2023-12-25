@@ -11,7 +11,6 @@ class NavigationDrawerApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(useMaterial3: true),
       home: const NavigationDrawerWidget(),
-      // initialRoute: RouteName.home,
       routes: appRoutes,
     );
   }

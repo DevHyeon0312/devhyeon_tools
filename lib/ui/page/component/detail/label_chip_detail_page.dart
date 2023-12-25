@@ -12,7 +12,7 @@ class _LabelChipDetailPageState extends State<LabelChipDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Label Chip Detail'),
+        title: const Text('Label Chip Detail'),
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
