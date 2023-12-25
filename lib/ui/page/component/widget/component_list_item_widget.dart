@@ -45,7 +45,7 @@ class _ComponentListItemWidgetState extends State<ComponentListItemWidget> {
                 padding: const EdgeInsets.only(left: 16, right: 16),
                 child: Text(
                   widget.description,
-                  maxLines: 3,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
               const Spacer(),
