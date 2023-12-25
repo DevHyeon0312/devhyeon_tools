@@ -10,9 +10,11 @@ class StoragePage extends StatefulWidget {
 class _StoragePageState extends State<StoragePage> {
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text(
-        'Coming Soon..'
+    return const SafeArea(
+      child: Center(
+        child: Text(
+            'Coming Soon..'
+        ),
       ),
     );
   }

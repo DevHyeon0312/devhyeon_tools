@@ -10,9 +10,11 @@ class SamplePage extends StatefulWidget {
 class _SamplePageState extends State<SamplePage> {
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text(
-          'Coming Soon..'
+    return const SafeArea(
+        child: Center(
+        child: Text(
+            'Coming Soon..'
+        ),
       ),
     );
   }
