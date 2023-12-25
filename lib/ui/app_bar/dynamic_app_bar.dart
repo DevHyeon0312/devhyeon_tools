@@ -12,9 +12,7 @@ class DynamicAppBar extends AppBar {
         return null;
       }
       case LayoutType.medium: {
-        return AppBar(
-          title: null,
-        );
+        return null;
       }
       default: {
         return AppBar(
