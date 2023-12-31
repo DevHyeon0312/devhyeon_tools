@@ -26,6 +26,7 @@ class LabelChip extends StatelessWidget {
     text.isNotEmpty,
     'Text should not be empty.',
   );
+
   final String text;
   final TextStyle? textStyle;
   final BorderRadius? borderRadius;

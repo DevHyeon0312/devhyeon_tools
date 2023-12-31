@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 
 class ComponentListItemWidget extends StatefulWidget {
-  const ComponentListItemWidget({super.key, required this.component, required this.name, required this.onClickDetailButton, required this.onClickCodeButton});
+  const ComponentListItemWidget({
+    super.key,
+    required this.component,
+    required this.name,
+    required this.onClickDetailButton,
+    required this.onClickCodeButton,
+  });
+
   final Widget component;
   final String name;
   final VoidCallback onClickDetailButton;

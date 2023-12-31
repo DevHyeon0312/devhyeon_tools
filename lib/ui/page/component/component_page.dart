@@ -64,18 +64,7 @@ class _ComponentPageState extends State<ComponentPage> {
         Navigator.pushNamed(context, RouteName.detailLabelChip);
       },
       onClickCodeButton: () {
-        final snackBar = SnackBar(
-          content: const Text('Coming Soon..'),
-          duration: const Duration(seconds: 2),
-          action: SnackBarAction(
-            label: 'Close',
-            onPressed: () {
-              // Undo 기능 추가
-              // 여기에 Undo를 눌렀을 때 수행할 동작을 추가할 수 있습니다.
-            },
-          ),
-        );
-        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        Navigator.pushNamed(context, RouteName.codeLabelChip);
       },
     ),
     // ComponentListItemWidget(
