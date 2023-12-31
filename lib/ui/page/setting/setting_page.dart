@@ -1,3 +1,7 @@
+import 'package:devhyeon_tools/application/router.dart';
+import 'package:devhyeon_tools/extention/locale_extention.dart';
+import 'package:devhyeon_tools/locale/locale_string.dart';
+import 'package:devhyeon_tools/ui/page/setting/widget/setting_list_item_widget.dart';
 import 'package:flutter/material.dart';
 
 class SettingPage extends StatefulWidget {
@@ -10,10 +14,27 @@ class SettingPage extends StatefulWidget {
 class _SettingPageState extends State<SettingPage> {
   @override
   Widget build(BuildContext context) {
-    return const SafeArea(
-      child: Center(
-        child: Text(
-            'Coming Soon..'
+    return SafeArea(
+      child: SingleChildScrollView(
+        child: Column(
+            children: [
+              SettingListItemWidget(
+                icon: Icon(
+                    Icons.language
+                ),
+                title: context.getLocaleString(LocaleString.settingsLanguage),
+                onClickItem: () {
+                  Navigator.pushNamed(context, RouteName.settingLanguage);
+                },
+              ),
+              SettingListItemWidget(
+                icon: Icon(
+                    Icons.font_download
+                ),
+                title: context.getLocaleString(LocaleString.settingsFont),
+                onClickItem: () {  },
+              ),
+            ]
         ),
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:devhyeon_tools/application/destination.dart';
+import 'package:devhyeon_tools/extention/locale_extention.dart';
 import 'package:devhyeon_tools/ui/app_bar/dynamic_app_bar.dart';
 import 'package:devhyeon_tools/utils/device_info.dart';
 import 'package:flutter/material.dart';
@@ -72,10 +73,10 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
         destinations: destinations.map(
               (MainDestination destination) {
             return NavigationDestination(
-              label: destination.label,
+              label: context.getLocaleString(destination.label),
               icon: destination.defaultIcon,
               selectedIcon: destination.selectedIcon,
-              tooltip: destination.label,
+              tooltip: null,
               enabled: true,
             );
           },
@@ -95,7 +96,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
               if (mainDestination.subItems.isNotEmpty) {
                 return ExpansionTile(
                   title: Text(
-                    mainDestination.label,
+                    context.getLocaleString(mainDestination.label),
                     style: const TextStyle(
                       fontSize: 18,
                     ),
@@ -104,7 +105,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                   children: mainDestination.subItems.map((subDestination) {
                     return ListTile(
                       title: Text(
-                        subDestination.label,
+                        context.getLocaleString(subDestination.label),
                         style: const TextStyle(
                           fontSize: 14,
                         ),
@@ -122,7 +123,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
               } else {
                 return ListTile(
                   title: Text(
-                    mainDestination.label,
+                    context.getLocaleString(mainDestination.label),
                     style: const TextStyle(
                       fontSize: 18,
                     ),
