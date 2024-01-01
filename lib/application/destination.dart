@@ -100,8 +100,8 @@ const List<MainDestination> destinations = <MainDestination>[
     routeName: '',
     page: SettingPage(),
     label: LocaleString.destinationSettings,
-    defaultIcon: Icon(Icons.settings_suggest_outlined),
-    selectedIcon:Icon(Icons.settings_suggest),
+    defaultIcon: Icon(Icons.settings),
+    selectedIcon:Icon(Icons.settings),
     subItems: [
       SubDestination(
         index: 0,

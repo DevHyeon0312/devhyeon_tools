@@ -1,3 +1,8 @@
+import 'dart:io';
+
+import 'package:devhyeon_tools/component/chip/label_chip.dart';
+import 'package:devhyeon_tools/extention/locale_extention.dart';
+import 'package:devhyeon_tools/locale/locale_string.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_syntax_view/flutter_syntax_view.dart';
@@ -10,8 +15,11 @@ class LabelChipCodePage extends StatefulWidget {
 }
 
 class _LabelChipCodePageState extends State<LabelChipCodePage> {
+
   @override
   Widget build(BuildContext context) {
+    Brightness currentSystemBrightness = MediaQuery.of(context).platformBrightness;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Label Chip'),
@@ -24,90 +32,34 @@ class _LabelChipCodePageState extends State<LabelChipCodePage> {
         actions: [
           IconButton(
             onPressed: () {
-              Clipboard.setData(const ClipboardData(text: _DartCode.template));
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('Text copied to clipboard'),
-                ),
+              Clipboard.setData(
+                  ClipboardData(
+                      text: LabelChip.getDartCode(),
+                  ),
               );
+              if (!Platform.isAndroid) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(
+                      context.getLocaleString(LocaleString.clipboardCopyMessage),
+                    ),
+                  ),
+                );
+              }
             },
             icon: const Icon(Icons.copy),
           ),
         ],
       ),
       body: SyntaxView(
-        code: _DartCode.template,
+        code: LabelChip.getDartCode(),
         syntax: Syntax.DART,
-        syntaxTheme: SyntaxTheme.standard(),
-        fontSize: 20.0,
+        syntaxTheme: currentSystemBrightness == Brightness.dark ? SyntaxTheme.vscodeDark() : SyntaxTheme.vscodeLight(),
+        fontSize: 12.0,
         withZoom: true,
         withLinesCount: true,
         expanded: true,
       ),
     );
   }
-}
-
-class _DartCode {
-  static const template = '''
-import 'package:flutter/material.dart';
-
-/// {@tool snippet}
-///
-/// ```dart
-/// LabelChip(
-///   text: '#TAG6',
-///   textStyle: const TextStyle(
-///     color: Colors.white
-///   ),
-///   backgroundColor: Colors.greenAccent,
-///   borderRadius: BorderRadius.circular(2.0),
-///   padding: const EdgeInsets.only(left: 8, right: 8, top: 2, bottom: 2),
-/// )
-/// ```
-/// {@end-tool}
-class LabelChip extends StatelessWidget {
-  LabelChip({
-    super.key,
-    required this.text,
-    this.textStyle,
-    this.borderRadius,
-    this.padding,
-    required this.backgroundColor,
-  }) : assert(
-    text.isNotEmpty,
-    'Text should not be empty.',
-  );
-  
-  final String text;
-  final TextStyle? textStyle;
-  final BorderRadius? borderRadius;
-  final EdgeInsetsGeometry? padding;
-  final Color backgroundColor;
-
-  @override
-  Widget build(BuildContext context) {
-    return FittedBox(
-      fit: BoxFit.scaleDown,
-      child: Container(
-        padding: padding,
-        constraints: const BoxConstraints(
-          minHeight: 24,
-        ),
-        decoration: BoxDecoration(
-            borderRadius: borderRadius,
-            color: backgroundColor
-        ),
-        child: Center(
-          child: Text(
-            text,
-            style: textStyle,
-            textAlign: TextAlign.center,
-          ),
-        ),
-      ),
-    );
-  }
-}
-''';
 }

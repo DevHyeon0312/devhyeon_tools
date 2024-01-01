@@ -1,4 +1,5 @@
 import 'package:devhyeon_tools/application/destination.dart';
+import 'package:devhyeon_tools/config/colors.dart';
 import 'package:devhyeon_tools/extention/locale_extention.dart';
 import 'package:devhyeon_tools/ui/app_bar/dynamic_app_bar.dart';
 import 'package:devhyeon_tools/utils/device_info.dart';
@@ -60,6 +61,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
   Widget buildBottomBarScaffold(BuildContext context) {
     return Scaffold(
       appBar: DynamicAppBar(layoutType: layoutType,).build(),
+      backgroundColor: ThemeColor.getAppBackgroundColor(context: context),
       body: SafeArea(
           bottom: false,
           top: false,
@@ -89,6 +91,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
     return Scaffold(
       appBar: DynamicAppBar(layoutType: layoutType,).build(),
       key: scaffoldKey,
+      backgroundColor: ThemeColor.getAppBackgroundColor(context: context),
       drawer: Drawer(
         child: ListView(
           children: destinations.map(

@@ -16,6 +16,8 @@ mixin LocaleString {
   static const String settingsLanguage = 'settingsLanguage';
   static const String settingsFont = 'settingsFont';
 
+  static const String clipboardCopyMessage = 'clipboardCopyMessage';
+
   static const Map<String, dynamic> en = {
     /// Navigation Tab ///
     destinationProfile: 'Profile',
@@ -34,6 +36,8 @@ mixin LocaleString {
     /// Settings ///
     settingsLanguage : 'Language',
     settingsFont: 'Font',
+    /// App ///
+    clipboardCopyMessage: 'Text copied to clipboard'
   };
 
   static const Map<String, dynamic> kr = {
@@ -54,5 +58,7 @@ mixin LocaleString {
     /// Settings ///
     settingsLanguage : 'Language',
     settingsFont: 'Font',
+    /// APP ///
+    clipboardCopyMessage: '복사되었습니다.'
   };
 }
