@@ -1,3 +1,4 @@
+import 'package:devhyeon_tools/config/colors.dart';
 import 'package:flutter/material.dart';
 
 class SamplePage extends StatefulWidget {
@@ -10,10 +11,14 @@ class SamplePage extends StatefulWidget {
 class _SamplePageState extends State<SamplePage> {
   @override
   Widget build(BuildContext context) {
-    return const SafeArea(
+    return SafeArea(
         child: Center(
         child: Text(
-            'Coming Soon..'
+            'Coming Soon..',
+          style: TextStyle(
+            fontSize: 20.0,
+            color: ThemeColor.getAppForegroundColor(context: context),
+          ),
         ),
       ),
     );

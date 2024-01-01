@@ -1,3 +1,4 @@
+import 'package:devhyeon_tools/config/colors.dart';
 import 'package:devhyeon_tools/extention/locale_extention.dart';
 import 'package:devhyeon_tools/locale/locale_code.dart';
 import 'package:devhyeon_tools/locale/locale_string.dart';
@@ -14,19 +15,19 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   final FlutterLocalization _localization = FlutterLocalization.instance;
 
-  void updateTranslate() async {
-    Future.delayed(
-      Duration(seconds: 2),
-        () {
-          _localization.translate(LocalCode.korea, save: false);
-        }
-    );
-  }
+  // void updateTranslate() async {
+  //   Future.delayed(
+  //     Duration(seconds: 2),
+  //       () {
+  //         _localization.translate(LocalCode.korea, save: false);
+  //       }
+  //   );
+  // }
 
   @override
   void initState() {
     super.initState();
-    // _localization.translate(LocalCode.english, save: false);
+    // _localization.translate(LocalCode.korea, save: false);
     // updateTranslate();
   }
 
@@ -35,7 +36,7 @@ class _ProfilePageState extends State<ProfilePage> {
     return SafeArea(
       child: Container(
         padding: const EdgeInsets.all(16),
-        color: Colors.white,
+        color: ThemeColor.getAppBackgroundColor(context: context),
         child: SingleChildScrollView(
           child: Container(
             width: double.infinity,
@@ -55,8 +56,9 @@ class _ProfilePageState extends State<ProfilePage> {
                   width: 320,
                   child: Text(
                     context.getLocaleString(LocaleString.profileUserName),
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 24.0,
+                      color: ThemeColor.getAppForegroundColor(context: context),
                     ),
                   ),
                 ),
@@ -64,8 +66,9 @@ class _ProfilePageState extends State<ProfilePage> {
                   width: 320,
                   child: Text(
                     context.getLocaleString(LocaleString.profileUserNickName),
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 20.0,
+                      color: ThemeColor.getAppForegroundColor(context: context),
                     ),
                   ),
                 ),
@@ -74,10 +77,16 @@ class _ProfilePageState extends State<ProfilePage> {
                   width: 320,
                   child: Row(
                     children: [
-                      const Icon(Icons.work),
+                      Icon(
+                        Icons.work,
+                        color: ThemeColor.getAppIconColor(context: context),
+                      ),
                       const SizedBox(width: 8,),
                       Text(
                         context.getLocaleString(LocaleString.profileCompany),
+                        style: TextStyle(
+                          color: ThemeColor.getAppForegroundColor(context: context),
+                        ),
                       )
                     ],
                   ),
@@ -87,10 +96,16 @@ class _ProfilePageState extends State<ProfilePage> {
                   width: 320,
                   child: Row(
                     children: [
-                      const Icon(Icons.location_pin),
+                      Icon(
+                        Icons.location_pin,
+                        color: ThemeColor.getAppIconColor(context: context),
+                      ),
                       const SizedBox(width: 8,),
                       Text(
                         context.getLocaleString(LocaleString.profileLocation),
+                        style: TextStyle(
+                          color: ThemeColor.getAppForegroundColor(context: context),
+                        ),
                       )
                     ],
                   ),
@@ -100,10 +115,16 @@ class _ProfilePageState extends State<ProfilePage> {
                   width: 320,
                   child: Row(
                     children: [
-                      const Icon(Icons.email),
+                      Icon(
+                        Icons.email,
+                        color: ThemeColor.getAppIconColor(context: context),
+                      ),
                       const SizedBox(width: 8,),
                       Text(
                         context.getLocaleString(LocaleString.profileEmail),
+                        style: TextStyle(
+                          color: ThemeColor.getAppForegroundColor(context: context),
+                        ),
                       )
                     ],
                   ),
