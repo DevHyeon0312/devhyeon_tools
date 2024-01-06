@@ -7,7 +7,7 @@ class ThemeColor {
         ? ThemeMode.dark
         : ThemeMode.light;
     if (currentThemeMode == ThemeMode.dark) {
-      return const Color(0xFF212121);
+      return const Color(0xFF000000);
     } else {
       return const Color(0xFFFFFFFF);
     }
@@ -19,7 +19,7 @@ class ThemeColor {
     if (currentThemeMode == ThemeMode.dark) {
       return const Color(0xFFFFFFFF);
     } else {
-      return const Color(0xFF212121);
+      return const Color(0xFF000000);
     }
   }
 
@@ -30,7 +30,7 @@ class ThemeColor {
     if (currentThemeMode == ThemeMode.dark) {
       return Colors.grey;
     } else {
-      return const Color(0xFF212121);
+      return const Color(0xFF000000);
     }
   }
 }

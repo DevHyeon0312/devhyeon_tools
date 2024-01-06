@@ -37,15 +37,13 @@ class _LabelChipCodePageState extends State<LabelChipCodePage> {
                       text: LabelChip.getDartCode(),
                   ),
               );
-              if (!Platform.isAndroid) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(
-                      context.getLocaleString(LocaleString.clipboardCopyMessage),
-                    ),
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(
+                    context.getLocaleString(LocaleString.clipboardCopyMessage),
                   ),
-                );
-              }
+                ),
+              );
             },
             icon: const Icon(Icons.copy),
           ),

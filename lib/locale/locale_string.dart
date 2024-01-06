@@ -17,6 +17,7 @@ mixin LocaleString {
   static const String settingsFont = 'settingsFont';
 
   static const String clipboardCopyMessage = 'clipboardCopyMessage';
+  static const String widgetPreView = 'widgetPreView';
 
   static const Map<String, dynamic> en = {
     /// Navigation Tab ///
@@ -37,7 +38,8 @@ mixin LocaleString {
     settingsLanguage : 'Language',
     settingsFont: 'Font',
     /// App ///
-    clipboardCopyMessage: 'Text copied to clipboard'
+    clipboardCopyMessage: 'Text copied to clipboard',
+    widgetPreView: 'Widget PreView',
   };
 
   static const Map<String, dynamic> kr = {
@@ -59,6 +61,7 @@ mixin LocaleString {
     settingsLanguage : 'Language',
     settingsFont: 'Font',
     /// APP ///
-    clipboardCopyMessage: '복사되었습니다.'
+    clipboardCopyMessage: '복사되었습니다.',
+    widgetPreView: '위젯 미리보기',
   };
 }
