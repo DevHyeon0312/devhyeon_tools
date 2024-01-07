@@ -47,9 +47,9 @@ class _NavigationDrawerAppState extends State<NavigationDrawerApp> {
     Brightness currentSystemBrightness = MediaQuery.of(context).platformBrightness;
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(
-        statusBarColor: currentSystemBrightness == Brightness.dark ? const Color(0xFF212121) : Colors.white,
+        statusBarColor: currentSystemBrightness == Brightness.dark ? Colors.black : Colors.white,
         statusBarIconBrightness: currentSystemBrightness == Brightness.dark ? Brightness.light : Brightness.dark,
-        systemNavigationBarColor: currentSystemBrightness == Brightness.dark ? const Color(0xFF212121) : Colors.white,
+        systemNavigationBarColor: currentSystemBrightness == Brightness.dark ? Colors.black : Colors.white,
         systemNavigationBarIconBrightness: currentSystemBrightness == Brightness.dark ? Brightness.light : Brightness.dark,
       ),
     );
@@ -62,9 +62,9 @@ class _NavigationDrawerAppState extends State<NavigationDrawerApp> {
           backgroundColor: currentSystemBrightness == Brightness.dark ? const Color(0xFF212121) : Colors.white,
           foregroundColor: currentSystemBrightness == Brightness.dark ? Colors.white : const Color(0xFF212121),
           systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarColor: currentSystemBrightness == Brightness.dark ? const Color(0xFF212121) : Colors.white,
+            statusBarColor: currentSystemBrightness == Brightness.dark ? Colors.black : Colors.white,
             statusBarIconBrightness: currentSystemBrightness == Brightness.dark ? Brightness.light : Brightness.dark,
-            systemNavigationBarColor: currentSystemBrightness == Brightness.dark ? const Color(0xFF212121) : Colors.white,
+            systemNavigationBarColor: currentSystemBrightness == Brightness.dark ? Colors.black : Colors.white,
             systemNavigationBarIconBrightness: currentSystemBrightness == Brightness.dark ? Brightness.light : Brightness.dark,
           ),
         ),

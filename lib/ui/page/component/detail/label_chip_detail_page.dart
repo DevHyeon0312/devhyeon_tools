@@ -1,9 +1,11 @@
+import 'package:devhyeon_tools/application/router.dart';
 import 'package:devhyeon_tools/component/chip/label_chip.dart';
 import 'package:devhyeon_tools/config/colors.dart';
-import 'package:devhyeon_tools/extention/locale_extention.dart';
-import 'package:devhyeon_tools/locale/locale_string.dart';
+import 'package:devhyeon_tools/dialog/color_change_dialog.dart';
+import 'package:devhyeon_tools/dialog/number_change_dialog.dart';
+import 'package:devhyeon_tools/dialog/text_change_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import 'package:sticky_headers/sticky_headers.dart';
 
 class LabelChipDetailPage extends StatefulWidget {
   const LabelChipDetailPage({super.key});
@@ -13,12 +15,13 @@ class LabelChipDetailPage extends StatefulWidget {
 }
 
 class _LabelChipDetailPageState extends State<LabelChipDetailPage> {
-  var labelChipText = '';
+  var labelChipText = 'Label Chip';
   var labelChipTextSize = 14.0;
-  Color? labelChipTextColor;
-  Color? labelChipBackgroundColor;
-  var labelChipBorderRadius = null;
-  var labelChipPadding = null;
+  Color? labelChipTextColor = Colors.black38;
+  Color? labelChipBackgroundColor = Colors.lightBlueAccent;
+  var labelChipBorderRadius = 0.0;
+  var labelChipHorizontalPadding = 0.0;
+  var labelChipVerticalPadding = 0.0;
 
   @override
   Widget build(BuildContext context) {
@@ -33,155 +36,409 @@ class _LabelChipDetailPageState extends State<LabelChipDetailPage> {
           },
         ),
       ),
-      backgroundColor: ThemeColor.getAppBackgroundColor(context: context),
+      backgroundColor: ThemeColor.getAppScaffoldColor(context: context),
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
+        child: ScrollConfiguration(
+          behavior: const ScrollBehavior().copyWith(
+            overscroll: false,
+            physics: const ClampingScrollPhysics(),
+          ),
+          child: Stack(
             children: [
-              Container(
-                margin: const EdgeInsets.only(left: 16.0, right: 16.0, top: 16.0, bottom: 8.0),
-                padding: const EdgeInsets.all(2.0),
-                width: double.infinity,
-                height: 50,
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(8.0),),
-                  color: Color(0xFF212121),
-                ),
-                child: Center(
-                  child: labelChipText.isNotEmpty ? LabelChip(
-                    text: labelChipText,
-                    textStyle: TextStyle(
-                      fontSize: labelChipTextSize,
-                      color: labelChipTextColor
-                    ),
-                    backgroundColor: labelChipBackgroundColor ?? Colors.white,
-                    borderRadius: labelChipBorderRadius,
-                    padding: labelChipPadding,
-                  ) : Container(),
-                ),
-              ),
-              Text(
-                context.getLocaleString(LocaleString.widgetPreView),
-                style: TextStyle(
-                  color: ThemeColor.getAppForegroundColor(context: context),
-                ),
-              ),
-              const SizedBox(height: 16),
-              Container(
-                margin: const EdgeInsets.all(16.0),
-                padding: const EdgeInsets.all(16.0),
-                width: double.infinity,
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(8.0),),
-                  color: Color(0xFF212121),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'text',
-                      style: TextStyle(
-                        color: ThemeColor.getAppForegroundColor(context: context),
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.only(top: 4, bottom: 16),
-                      padding: const EdgeInsets.all(8),
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(8.0),),
-                        color: Color(0xFF515151),
-                      ),
-                      child: TextField(
-                        textCapitalization: TextCapitalization.words,
-                        cursorColor: ThemeColor.getAppForegroundColor(context: context),
-                        decoration: const InputDecoration(
-                          hintText: 'input text (ex.hello)',
-                          hintStyle: TextStyle(
-                            color: Color(0x80FFFFFF)
-                          )
-                        ),
-                        style: TextStyle(
-                          color: ThemeColor.getAppForegroundColor(context: context),
-                        ),
-                        onChanged: (text) {
-                          setState(() {
-                            labelChipText = text;
-                          });
-                        },
-                      ),
-                    ),
-                    Text(
-                      'textStyle',
-                      style: TextStyle(
-                        color: ThemeColor.getAppForegroundColor(context: context),
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.only(top: 4, bottom: 16),
-                      padding: const EdgeInsets.all(8),
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(8.0),),
-                        color: Color(0xFF515151),
-                      ),
-                      child: Column(
-                        children: [
-                          TextField(
-                            textCapitalization: TextCapitalization.words,
-                            cursorColor: ThemeColor.getAppForegroundColor(context: context),
-                            decoration: const InputDecoration(
-                                hintText: 'input text size (ex.14)',
-                                hintStyle: TextStyle(
-                                    color: Color(0x80FFFFFF)
-                                )
-                            ),
-                            style: TextStyle(
-                              color: ThemeColor.getAppForegroundColor(context: context),
-                            ),
-                            onChanged: (text) {
-                              try {
-                                var textSize = double.parse(text);
-                                setState(() {
-                                  labelChipTextSize = textSize;
-                                });
-                              } catch(_) {}
-                            },
+              ListView(
+                children: [
+                  StickyHeader(
+                    header: Container(
+                      padding: const EdgeInsets.only(
+                          top: 8, left: 8, right: 8, bottom: 8),
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                          borderRadius: const BorderRadius.only(
+                            bottomLeft: Radius.circular(8.0),
+                            bottomRight: Radius.circular(8.0),
                           ),
-                          const SizedBox(height: 16,),
-                          HueRingPicker(
-                            pickerColor: labelChipTextColor ?? Colors.white,
-                            onColorChanged: (changeColor) {
-                              setState(() {
-                                labelChipTextColor = changeColor;
-                              });
+                          color: ThemeColor.getAppBackgroundColor(
+                              context: context)),
+                      child: Center(
+                        child: labelChipText.isNotEmpty
+                            ? LabelChip(
+                                text: labelChipText,
+                                textStyle: TextStyle(
+                                    fontSize: labelChipTextSize,
+                                    color: labelChipTextColor),
+                                backgroundColor:
+                                    labelChipBackgroundColor ?? Colors.white,
+                                borderRadius: BorderRadius.all(
+                                    Radius.circular(labelChipBorderRadius)),
+                                padding: EdgeInsets.symmetric(
+                                  vertical: labelChipVerticalPadding,
+                                  horizontal: labelChipHorizontalPadding,
+                                ),
+                              )
+                            : Container(),
+                      ),
+                    ),
+                    content: Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Wrap(
+                        children: [
+                          TextButton.icon(
+                            onPressed: () {
+                              showDialog<void>(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return TextChangeDialog(
+                                      title: 'Label Chip Text',
+                                      description: 'this is set chip text..',
+                                      onClickCancel: () =>
+                                          Navigator.of(context).pop(),
+                                      onClickApply: (text) {
+                                        setState(() => labelChipText = text);
+                                        Navigator.of(context).pop();
+                                      },
+                                    );
+                                  });
                             },
+                            style: ButtonStyle(
+                              overlayColor:
+                                  MaterialStateProperty.resolveWith<Color?>(
+                                      (Set<MaterialState> states) {
+                                return ThemeColor.getIconButtonOverlayColor(
+                                    context: context);
+                              }),
+                              backgroundColor:
+                                  MaterialStateProperty.resolveWith<Color?>(
+                                      (Set<MaterialState> states) {
+                                return ThemeColor.getIconButtonBackgroundColor(
+                                    context: context);
+                              }),
+                            ),
+                            icon: Icon(
+                              Icons.abc,
+                              color: ThemeColor.getAppForegroundColor(
+                                  context: context),
+                            ),
+                            label: Text(
+                              'Change Text',
+                              style: TextStyle(
+                                color: ThemeColor.getAppForegroundColor(
+                                    context: context),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 8,
+                          ),
+                          TextButton.icon(
+                            onPressed: () {
+                              showDialog<void>(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return NumberChangeDialog(
+                                      title: 'Label Chip Text Size',
+                                      description: 'this is set chip text..',
+                                      onClickCancel: () =>
+                                          Navigator.of(context).pop(),
+                                      onClickApply: (size) {
+                                        setState(
+                                            () => labelChipTextSize = size);
+                                        Navigator.of(context).pop();
+                                      },
+                                    );
+                                  });
+                            },
+                            style: ButtonStyle(
+                              overlayColor:
+                                  MaterialStateProperty.resolveWith<Color?>(
+                                      (Set<MaterialState> states) {
+                                return ThemeColor.getIconButtonOverlayColor(
+                                    context: context);
+                              }),
+                              backgroundColor:
+                                  MaterialStateProperty.resolveWith<Color?>(
+                                      (Set<MaterialState> states) {
+                                return ThemeColor.getIconButtonBackgroundColor(
+                                    context: context);
+                              }),
+                            ),
+                            icon: Icon(
+                              Icons.format_size,
+                              color: ThemeColor.getAppForegroundColor(
+                                  context: context),
+                            ),
+                            label: Text(
+                              'Change Text Size',
+                              style: TextStyle(
+                                color: ThemeColor.getAppForegroundColor(
+                                    context: context),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 8,
+                          ),
+                          const SizedBox(
+                            width: 8,
+                          ),
+                          TextButton.icon(
+                            onPressed: () {
+                              showDialog<void>(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return ColorChangeDialog(
+                                      title: 'Label Text Color',
+                                      description: 'this is set chip text..',
+                                      onClickCancel: () =>
+                                          Navigator.of(context).pop(),
+                                      onClickApply: (color) {
+                                        setState(
+                                            () => labelChipTextColor = color);
+                                        Navigator.of(context).pop();
+                                      },
+                                    );
+                                  });
+                            },
+                            style: ButtonStyle(
+                              overlayColor:
+                                  MaterialStateProperty.resolveWith<Color?>(
+                                      (Set<MaterialState> states) {
+                                return ThemeColor.getIconButtonOverlayColor(
+                                    context: context);
+                              }),
+                              backgroundColor:
+                                  MaterialStateProperty.resolveWith<Color?>(
+                                      (Set<MaterialState> states) {
+                                return ThemeColor.getIconButtonBackgroundColor(
+                                    context: context);
+                              }),
+                            ),
+                            icon: Icon(
+                              Icons.brush,
+                              color: ThemeColor.getAppForegroundColor(
+                                  context: context),
+                            ),
+                            label: Text(
+                              'Change Text Color',
+                              style: TextStyle(
+                                color: ThemeColor.getAppForegroundColor(
+                                    context: context),
+                              ),
+                            ),
+                          ),
+                          TextButton.icon(
+                            onPressed: () {
+                              showDialog<void>(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return NumberChangeDialog(
+                                      title: 'Label Chip Border Radius',
+                                      description: 'this is set chip text..',
+                                      onClickCancel: () =>
+                                          Navigator.of(context).pop(),
+                                      onClickApply: (size) {
+                                        setState(
+                                            () => labelChipBorderRadius = size);
+                                        Navigator.of(context).pop();
+                                      },
+                                    );
+                                  });
+                            },
+                            style: ButtonStyle(
+                              overlayColor:
+                                  MaterialStateProperty.resolveWith<Color?>(
+                                      (Set<MaterialState> states) {
+                                return ThemeColor.getIconButtonOverlayColor(
+                                    context: context);
+                              }),
+                              backgroundColor:
+                                  MaterialStateProperty.resolveWith<Color?>(
+                                      (Set<MaterialState> states) {
+                                return ThemeColor.getIconButtonBackgroundColor(
+                                    context: context);
+                              }),
+                            ),
+                            icon: Icon(
+                              Icons.architecture_sharp,
+                              color: ThemeColor.getAppForegroundColor(
+                                  context: context),
+                            ),
+                            label: Text(
+                              'Change Border Radius',
+                              style: TextStyle(
+                                color: ThemeColor.getAppForegroundColor(
+                                    context: context),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 8,
+                          ),
+                          TextButton.icon(
+                            onPressed: () {
+                              showDialog<void>(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return NumberChangeDialog(
+                                      title: 'Label Chip Horizontal Padding',
+                                      description: 'this is set chip text..',
+                                      onClickCancel: () =>
+                                          Navigator.of(context).pop(),
+                                      onClickApply: (size) {
+                                        setState(() =>
+                                            labelChipHorizontalPadding = size);
+                                        Navigator.of(context).pop();
+                                      },
+                                    );
+                                  });
+                            },
+                            style: ButtonStyle(
+                              overlayColor:
+                                  MaterialStateProperty.resolveWith<Color?>(
+                                      (Set<MaterialState> states) {
+                                return ThemeColor.getIconButtonOverlayColor(
+                                    context: context);
+                              }),
+                              backgroundColor:
+                                  MaterialStateProperty.resolveWith<Color?>(
+                                      (Set<MaterialState> states) {
+                                return ThemeColor.getIconButtonBackgroundColor(
+                                    context: context);
+                              }),
+                            ),
+                            icon: Icon(
+                              Icons.architecture_sharp,
+                              color: ThemeColor.getAppForegroundColor(
+                                  context: context),
+                            ),
+                            label: Text(
+                              'Change Horizontal Padding',
+                              style: TextStyle(
+                                color: ThemeColor.getAppForegroundColor(
+                                    context: context),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 8,
+                          ),
+                          TextButton.icon(
+                            onPressed: () {
+                              showDialog<void>(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return NumberChangeDialog(
+                                      title: 'Label Chip Vertical Padding',
+                                      description: 'this is set chip text..',
+                                      onClickCancel: () =>
+                                          Navigator.of(context).pop(),
+                                      onClickApply: (size) {
+                                        setState(() =>
+                                            labelChipVerticalPadding = size);
+                                        Navigator.of(context).pop();
+                                      },
+                                    );
+                                  });
+                            },
+                            style: ButtonStyle(
+                              overlayColor:
+                                  MaterialStateProperty.resolveWith<Color?>(
+                                      (Set<MaterialState> states) {
+                                return ThemeColor.getIconButtonOverlayColor(
+                                    context: context);
+                              }),
+                              backgroundColor:
+                                  MaterialStateProperty.resolveWith<Color?>(
+                                      (Set<MaterialState> states) {
+                                return ThemeColor.getIconButtonBackgroundColor(
+                                    context: context);
+                              }),
+                            ),
+                            icon: Icon(
+                              Icons.architecture_sharp,
+                              color: ThemeColor.getAppForegroundColor(
+                                  context: context),
+                            ),
+                            label: Text(
+                              'Change Vertical Padding',
+                              style: TextStyle(
+                                color: ThemeColor.getAppForegroundColor(
+                                    context: context),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 8,
+                          ),
+                          TextButton.icon(
+                            onPressed: () {
+                              showDialog<void>(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return ColorChangeDialog(
+                                      title: 'Label Chip Color',
+                                      description: 'this is set chip text..',
+                                      onClickCancel: () =>
+                                          Navigator.of(context).pop(),
+                                      onClickApply: (color) {
+                                        setState(() =>
+                                            labelChipBackgroundColor = color);
+                                        Navigator.of(context).pop();
+                                      },
+                                    );
+                                  });
+                            },
+                            style: ButtonStyle(
+                              overlayColor:
+                                  MaterialStateProperty.resolveWith<Color?>(
+                                      (Set<MaterialState> states) {
+                                return ThemeColor.getIconButtonOverlayColor(
+                                    context: context);
+                              }),
+                              backgroundColor:
+                                  MaterialStateProperty.resolveWith<Color?>(
+                                      (Set<MaterialState> states) {
+                                return ThemeColor.getIconButtonBackgroundColor(
+                                    context: context);
+                              }),
+                            ),
+                            icon: Icon(
+                              Icons.brush,
+                              color: ThemeColor.getAppForegroundColor(
+                                  context: context),
+                            ),
+                            label: Text(
+                              'Change Chip Color',
+                              style: TextStyle(
+                                color: ThemeColor.getAppForegroundColor(
+                                    context: context),
+                              ),
+                            ),
                           ),
                         ],
                       ),
                     ),
-                    Text(
-                      'backgroundColor',
-                      style: TextStyle(
-                        color: ThemeColor.getAppForegroundColor(context: context),
-                      ),
+                  )
+                ],
+              ),
+              Positioned(
+                bottom: 16,
+                right: 16,
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(999.0),
+                    color: ThemeColor.getIconButtonBackgroundColor(context: context),
+                  ),
+                  child: IconButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, RouteName.codeLabelChip);
+                    },
+                    tooltip: 'show code',
+                    icon: Icon(
+                      Icons.code,
+                      color: ThemeColor.getAppForegroundColor(context: context),
+                      size: 32,
                     ),
-                    Container(
-                      margin: const EdgeInsets.only(top: 4, bottom: 16),
-                      padding: const EdgeInsets.all(8),
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(8.0),),
-                        color: Color(0xFF515151),
-                      ),
-                      child: HueRingPicker(
-                        pickerColor: labelChipBackgroundColor ?? Colors.white,
-                        onColorChanged: (changeColor) {
-                          setState(() {
-                            labelChipBackgroundColor = changeColor;
-                          });
-                        },
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
               ),
             ],
