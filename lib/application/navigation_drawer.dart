@@ -1,7 +1,6 @@
 import 'package:devhyeon_tools/application/destination.dart';
 import 'package:devhyeon_tools/config/colors.dart';
 import 'package:devhyeon_tools/extention/locale_extention.dart';
-import 'package:devhyeon_tools/ui/app_bar/dynamic_app_bar.dart';
 import 'package:devhyeon_tools/utils/device_info.dart';
 import 'package:flutter/material.dart';
 
@@ -60,7 +59,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
 
   Widget buildBottomBarScaffold(BuildContext context) {
     return Scaffold(
-      appBar: DynamicAppBar(layoutType: layoutType,).build(),
+      appBar: null,
       backgroundColor: ThemeColor.getAppBackgroundColor(context: context),
       body: SafeArea(
           bottom: false,
@@ -89,7 +88,15 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
 
   Widget buildDrawerScaffold(BuildContext context) {
     return Scaffold(
-      appBar: DynamicAppBar(layoutType: layoutType,).build(),
+      appBar: AppBar(
+        title: const Text('Flutter Helper'),
+        foregroundColor: ThemeColor.getAppForegroundColor(context: context),
+        leading: IconButton(
+          icon: const Icon(Icons.menu),
+          color: ThemeColor.getAppForegroundColor(context: context),
+          onPressed: openDrawer,
+        ),
+      ),
       key: scaffoldKey,
       backgroundColor: ThemeColor.getAppBackgroundColor(context: context),
       drawer: Drawer(

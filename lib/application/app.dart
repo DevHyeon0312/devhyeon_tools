@@ -59,8 +59,8 @@ class _NavigationDrawerAppState extends State<NavigationDrawerApp> {
       theme: ThemeData(
         useMaterial3: true,
         appBarTheme: AppBarTheme(
-          backgroundColor: currentSystemBrightness == Brightness.dark ? Colors.black87 : Colors.white,
-          foregroundColor: currentSystemBrightness == Brightness.dark ? Colors.white : Colors.black87,
+          backgroundColor: currentSystemBrightness == Brightness.dark ? const Color(0xFF212121) : Colors.white,
+          foregroundColor: currentSystemBrightness == Brightness.dark ? Colors.white : const Color(0xFF212121),
           systemOverlayStyle: SystemUiOverlayStyle(
             statusBarColor: currentSystemBrightness == Brightness.dark ? Colors.black : Colors.white,
             statusBarIconBrightness: currentSystemBrightness == Brightness.dark ? Brightness.light : Brightness.dark,
@@ -70,7 +70,7 @@ class _NavigationDrawerAppState extends State<NavigationDrawerApp> {
         ),
         navigationBarTheme: NavigationBarThemeData(
           height: 60,
-          backgroundColor: currentSystemBrightness == Brightness.dark ? Colors.black87 : Colors.white12,
+          backgroundColor: currentSystemBrightness == Brightness.dark ? const Color(0xFF212121) : Colors.white,
           indicatorColor: Colors.transparent,
           overlayColor: MaterialStateProperty.resolveWith<Color?>(
               (Set<MaterialState> states) {
